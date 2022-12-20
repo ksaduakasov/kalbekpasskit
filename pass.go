@@ -90,7 +90,7 @@ type Pass struct {
 	GroupingIdentifier         string                 `json:"groupingIdentifier,omitempty"`
 	Beacons                    []Beacon               `json:"beacons,omitempty"`
 	Locations                  []Location             `json:"locations,omitempty"`
-	Barcodes                   []Barcode              `json:"barcodes,omitempty"`
+	Barcodes                   []Barcodes             `json:"barcodes,omitempty"`
 	EventTicket                *EventTicket           `json:"eventTicket,omitempty"`
 	Coupon                     *Coupon                `json:"coupon,omitempty"`
 	StoreCard                  *StoreCard             `json:"storeCard,omitempty"`
@@ -444,17 +444,17 @@ func (l *Location) GetValidationErrors() []string {
 	return []string{}
 }
 
-type Barcode struct {
+type Barcodes struct {
 	Format          BarcodeFormat `json:"format,omitempty"`
 	AltText         string        `json:"altText,omitempty"`
 	Message         string        `json:"message,omitempty"`
 	MessageEncoding string        `json:"messageEncoding,omitempty"`
 }
 
-func (b *Barcode) IsValid() bool {
+func (b *Barcodes) IsValid() bool {
 	return len(b.GetValidationErrors()) == 0
 }
-func (b *Barcode) GetValidationErrors() []string {
+func (b *Barcodes) GetValidationErrors() []string {
 	var validationErrors []string
 
 	if string(b.Format) == "" || strings.TrimSpace(b.Message) == "" || strings.TrimSpace(b.MessageEncoding) == "" || strings.TrimSpace(b.AltText) == "" {
